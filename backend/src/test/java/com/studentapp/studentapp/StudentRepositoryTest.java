@@ -49,9 +49,13 @@ public class StudentRepositoryTest {
         Assertions.assertThat(students.size()).isGreaterThan(0);
     }
 
+    public void updateStudentTest(){
+
+    }
+
 
 
     /*
-
+   
     */
 }
