@@ -18,7 +18,6 @@ public class StudentRepositoryTest {
     @Autowired
     private StudentRepository studentRepository;
 
-
     //JUnit Test for Save Student
     @Test
     public void saveStudentTest(){
@@ -44,7 +43,7 @@ public class StudentRepositoryTest {
 
     //JUnit Test for Get All Student
     @Test
-    public  void  getListOfStudentsTest(){
+    public void getListOfStudentsTest(){
         List<Student> students = studentRepository.findAll();
         Assertions.assertThat(students.size()).isGreaterThan(0);
     }
