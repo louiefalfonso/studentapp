@@ -2,11 +2,10 @@ import React, { useState, useEffect } from "react";
 import StudentServices from "@/services/StudentServices";
 
 const ListTables = () => {
+
   const [students, setStudents] = useState([]);
 
-  useEffect(() => {
-    getAllStudents();
-  }, []);
+  useEffect(() => {getAllStudents();}, []);
 
   const getAllStudents = () => {
     StudentServices.getAllStudents()
@@ -24,12 +23,15 @@ const ListTables = () => {
       <h2 className="text-center"> Student List</h2>
       <table className="table table-bordered table-striped">
         <thead>
-          <th>Student Id </th>
-          <th>Student First Name </th>
-          <th>Student Last Name </th>
-          <th>Student Email Id </th>
-          <th>College</th>
-          <th>Percentage</th>
+          <tr>
+            <th>Student Id </th>
+            <th>Student First Name </th>
+            <th>Student Last Name </th>
+            <th>Student Email Id </th>
+            <th>College</th>
+            <th>Percentage</th>
+            <th>Active Student</th>
+          </tr>
         </thead>
         <tbody>
           {students.map((student) => (
@@ -40,6 +42,7 @@ const ListTables = () => {
               <td>{student.email}</td>
               <td>{student.college}</td>
               <td>{student.percentage}</td>
+              <td>{student.activeStudent.toString().toUpperCase()}</td>
             </tr>
           ))}
         </tbody>
