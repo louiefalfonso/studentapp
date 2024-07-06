@@ -5,6 +5,7 @@ import com.studentapp.studentapp.entity.Student;
 
 public class StudentMapper {
 
+    // Convert Student JPA Entity to DTO
     public static StudentDto mapToStudentDto(Student student){
         return new StudentDto(
                 student.getId(),
@@ -16,7 +17,7 @@ public class StudentMapper {
                 student.getActiveStudent()
         );
     }
-
+    // Convert Student DTO to JPA Entity
     public static Student mapToStudent(StudentDto studentDto){
         return new Student(
               studentDto.getId(),

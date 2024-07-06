@@ -7,6 +7,7 @@ import com.studentapp.studentapp.mapper.StudentMapper;
 import com.studentapp.studentapp.repository.StudentRepository;
 import com.studentapp.studentapp.service.StudentService;
 import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,13 +18,21 @@ import java.util.stream.Collectors;
 public class StudentServiceImpl implements StudentService {
 
     private StudentRepository studentRepository;
+    private ModelMapper modelMapper;
 
     // REST API - Create Students
     @Override
     public StudentDto createStudent(StudentDto studentDto) {
-        Student student = StudentMapper.mapToStudent(studentDto);
+
+        //Student student = StudentMapper.mapToStudent(studentDto);
+
+        Student student = modelMapper.map(studentDto, Student.class);
+
         Student savedStudent = studentRepository.save(student);
-        return  StudentMapper.mapToStudentDto(savedStudent);
+
+       StudentDto savedStudentDto = modelMapper.map(savedStudent, StudentDto.class);
+
+        return savedStudentDto;
     }
 
     // REST API - Get Students By Id
@@ -32,7 +41,8 @@ public class StudentServiceImpl implements StudentService {
         Student student = studentRepository.findAllById(studentId)
                 .orElseThrow(() ->
                 new ResourceNotFoundException("Student is not exist with a given Id:" + studentId));
-        return StudentMapper.mapToStudentDto(student);
+        //return StudentMapper.mapToStudentDto(student);
+        return modelMapper.map(student, StudentDto.class);
 
     }
 
@@ -40,7 +50,10 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<StudentDto> getAllStudents() {
         List<Student> students = studentRepository.findAll();
-        return students.stream().map((StudentMapper::mapToStudentDto))
+        // return students.stream().map((StudentMapper::mapToStudentDto))
+        //        .collect(Collectors.toList());
+
+        return students.stream().map((student) -> modelMapper.map(student, StudentDto.class))
                 .collect(Collectors.toList());
     }
 
@@ -59,7 +72,8 @@ public class StudentServiceImpl implements StudentService {
         student.setActiveStudent(updatedStudent.getActiveStudent());
         Student updatedStudentObj = studentRepository.save(student);
 
-        return StudentMapper.mapToStudentDto(updatedStudentObj);
+        //return StudentMapper.mapToStudentDto(updatedStudentObj);
+        return modelMapper.map(updatedStudentObj, StudentDto.class);
     }
 
     // REST API - Delete Student
