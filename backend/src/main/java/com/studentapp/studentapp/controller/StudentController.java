@@ -1,8 +1,11 @@
 package com.studentapp.studentapp.controller;
 
 import com.studentapp.studentapp.dto.StudentDto;
+import com.studentapp.studentapp.entity.Student;
+import com.studentapp.studentapp.repository.StudentRepository;
 import com.studentapp.studentapp.service.StudentService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +20,9 @@ public class StudentController {
 
     private StudentService studentService;
 
+    @Autowired
+    private  StudentRepository studentRepository;
+
     // POST Student Rest API
     @PostMapping
     public ResponseEntity<StudentDto> createStudent(@RequestBody StudentDto studentDto){
@@ -24,11 +30,13 @@ public class StudentController {
         return new ResponseEntity<>(savedStudent, HttpStatus.CREATED);
     }
 
-    //GET Student Rest API
+    //GET Student By Id Rest API
     @GetMapping("{id}")
-    public ResponseEntity<StudentDto> getStudentById(@PathVariable("id") Long studentId){
-        StudentDto studentDto = studentService.getStudentById(studentId);
-        return  ResponseEntity.ok(studentDto);
+    public ResponseEntity<Student> getStudentById(@PathVariable("id") long id){
+
+        Student student = studentRepository.findAllById(id)
+                .orElseThrow(()-> new RuntimeException("Student not exist with id:" + id));
+        return ResponseEntity.ok(student);
     }
 
     //Get All Students Rest API
@@ -40,10 +48,20 @@ public class StudentController {
 
     //Update Student Rest API
     @PutMapping("{id}")
-    public ResponseEntity<StudentDto> updateStudent(@PathVariable("id") Long studentId,
-                                                    @RequestBody StudentDto updatedStudent){
-        StudentDto studentDto = studentService.updateStudent(studentId, updatedStudent);
-        return ResponseEntity.ok(studentDto);
+    public ResponseEntity<Student> updateStudent(@PathVariable ("id") long id,
+                                                 @RequestBody Student studentDetails){
+        Student updateStudent = studentRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("Student not exist with id: " + id));
+
+        updateStudent.setFirstName(studentDetails.getFirstName());
+        updateStudent.setLastName(studentDetails.getLastName());
+        updateStudent.setEmail(studentDetails.getEmail());
+        updateStudent.setCollege(studentDetails.getCollege());
+        updateStudent.setPercentage(studentDetails.getPercentage());
+        updateStudent.setActiveStudent(studentDetails.getActiveStudent());
+        studentRepository.save(updateStudent);
+
+      return ResponseEntity.ok(updateStudent);
 
     }
 

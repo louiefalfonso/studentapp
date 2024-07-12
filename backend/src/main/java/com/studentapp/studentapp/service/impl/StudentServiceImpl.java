@@ -59,21 +59,21 @@ public class StudentServiceImpl implements StudentService {
 
     // REST API - Update Student
     @Override
-    public StudentDto updateStudent(Long studentId, StudentDto updatedStudent) {
+    public StudentDto updateStudent(Long studentId, StudentDto updateStudent) {
         Student student = studentRepository.findAllById(studentId).orElseThrow(
                 () -> new ResourceNotFoundException("Student is not exist with given id:" +studentId)
         );
 
-        student.setFirstName(updatedStudent.getFirstName());
-        student.setLastName(updatedStudent.getLastName());
-        student.setEmail(updatedStudent.getEmail());
-        student.setPercentage(updatedStudent.getPercentage());
-        student.setCollege(updatedStudent.getCollege());
-        student.setActiveStudent(updatedStudent.getActiveStudent());
-        Student updatedStudentObj = studentRepository.save(student);
+        student.setFirstName(updateStudent.getFirstName());
+        student.setLastName(updateStudent.getLastName());
+        student.setEmail(updateStudent.getEmail());
+        student.setPercentage(updateStudent.getPercentage());
+        student.setCollege(updateStudent.getCollege());
+        student.setActiveStudent(updateStudent.getActiveStudent());
+        Student updateStudentObj = studentRepository.save(student);
 
-        //return StudentMapper.mapToStudentDto(updatedStudentObj);
-        return modelMapper.map(updatedStudentObj, StudentDto.class);
+        //return StudentMapper.mapToStudentDto(updateStudentObj);
+        return modelMapper.map(updateStudentObj, StudentDto.class);
     }
 
     // REST API - Delete Student
