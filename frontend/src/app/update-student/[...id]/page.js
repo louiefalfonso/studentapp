@@ -6,10 +6,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import UpdateStudent from "@/components/UpdateStudent";
 
 const UpdateStudentPage = () => {
-  const params = useParams();
+  const { id } = useParams();
   return (
     <>
-      <UpdateStudent studentId={params.id} />
+      <UpdateStudent studentId={id} />
     </>
   );
 };

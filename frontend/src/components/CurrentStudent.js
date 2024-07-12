@@ -24,13 +24,8 @@ const CurrentStudent = () => {
     fetchCurrentStudent();
   }, [id]);
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-
   return (
     <div>
-      {/* Render the current student's data */}
       <div className="container text-center">
         <div className="row">
           <h2 className="text-center">Student Details</h2>
@@ -43,6 +38,7 @@ const CurrentStudent = () => {
                 <th>Email</th>
                 <th>College</th>
                 <th>Percentage</th>
+                <th>Active Student</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -54,6 +50,7 @@ const CurrentStudent = () => {
                 <td>{currentStudent.email}</td>
                 <td>{currentStudent.college}</td>
                 <td>{currentStudent.percentage}</td>
+                <td>{currentStudent.activeStudent ? "Yes" : "No"}</td>
                 <td>
                   <Link className="btn btn-info" href={`/`}>
                     Back

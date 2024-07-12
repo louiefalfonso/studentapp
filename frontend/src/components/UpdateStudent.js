@@ -25,7 +25,10 @@ const updateCurrentStudent = (e) => {
       .then(() => {
         router.push("/");
         console.log("Update Current Student Complete!");
-        
+      })
+      .catch((error) => {
+        setError(error.message);
+        console.error(error);
       });
   };
 

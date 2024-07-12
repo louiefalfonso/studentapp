@@ -18,9 +18,21 @@ const StudentTableList = () => {
     fetchStudents();
   }, []);
 
+  const deleteStudent = async (id) => {
+    try { 
+      await StudentService.deleteStudent(id);
+      setStudents(students.filter((student) => student.id !== id));
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
     <div className="container">
       <h2 className="text-center"> Student List </h2>
+      <Link className="btn btn-primary" href={`/add-student`}>
+        Add New Student
+      </Link>
       <table className="table table-bordered table-striped">
         <thead>
           <tr>
@@ -52,11 +64,17 @@ const StudentTableList = () => {
                   View
                 </Link>
                 <Link
-                  className="btn btn-secondary"
+                  className="btn btn-info"
                   href={`/update-student/${student.id}`}
                 >
                   Update
                 </Link>
+                <button 
+                  className="btn btn-danger"
+                  onClick={() => deleteStudent(student.id)}
+                >
+                  Delete
+                  </button>
               </td>
             </tr>
           ))}
