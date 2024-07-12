@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import StudentService from "@/services/StudentService";
 
-const TableList = () => {
+const StudentTableList = () => {
   const [students, setStudents] = useState([]);
 
   useEffect(() => {
@@ -30,6 +30,7 @@ const TableList = () => {
             <th>Email</th>
             <th>College</th>
             <th>Percentage</th>
+            <th>Active Student</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -42,9 +43,19 @@ const TableList = () => {
               <td>{student.email}</td>
               <td>{student.college}</td>
               <td>{student.percentage}</td>
+              <td>{student.activeStudent ? "Yes" : "No"}</td>
               <td>
-                <Link className="btn btn-primary" href={`/student/${student.id}`}>
-                  View Details
+                <Link
+                  className="btn btn-primary"
+                  href={`/student/${student.id}`}
+                >
+                  View
+                </Link>
+                <Link
+                  className="btn btn-secondary"
+                  href={`/update-student/${student.id}`}
+                >
+                  Update
                 </Link>
               </td>
             </tr>
@@ -55,4 +66,4 @@ const TableList = () => {
   );
 };
 
-export default TableList;
+export default StudentTableList;

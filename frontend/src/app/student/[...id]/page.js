@@ -6,7 +6,6 @@ import CurrentStudent from "@/components/CurrentStudent";
 
 const StudentPage = () => {
   const { id } = useParams();
-
   return (
     <>
       <CurrentStudent studentId={id} />
@@ -15,3 +14,5 @@ const StudentPage = () => {
 };
 
 export default StudentPage;
+
+
