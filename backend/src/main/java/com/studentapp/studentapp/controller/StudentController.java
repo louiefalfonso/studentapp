@@ -30,14 +30,14 @@ public class StudentController {
         return new ResponseEntity<>(savedStudent, HttpStatus.CREATED);
     }
 
-    //GET Student By Id Rest API
+    //GET Student By ID Rest API
     @GetMapping("{id}")
     public ResponseEntity<Student> getStudentById(@PathVariable("id") long id){
-
         Student student = studentRepository.findAllById(id)
                 .orElseThrow(()-> new RuntimeException("Student not exist with id:" + id));
-        return ResponseEntity.ok(student);
+        return  ResponseEntity.ok(student);
     }
+
 
     //Get All Students Rest API
     @GetMapping
@@ -64,6 +64,7 @@ public class StudentController {
       return ResponseEntity.ok(updateStudent);
 
     }
+
 
     //Delete Student Rest API
     @DeleteMapping("{id}")

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:8080/api/students";
+const API_BASE_URL = process.env.NEXT_PUBLIC_DEV_API_BASE_URL;
 
 const StudentService = {
   getAllStudents: async () => {
