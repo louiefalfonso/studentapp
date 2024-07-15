@@ -29,7 +29,7 @@ const StudentTableList = () => {
 
   return (
     <div className="container">
-      <h2 className="text-center"> Student List </h2>
+      <h2 data-testid="cypress-title">Student List</h2>
       <Link className="btn btn-primary" href={`/add-student`}>
         Add New Student
       </Link>
@@ -69,12 +69,12 @@ const StudentTableList = () => {
                 >
                   Update
                 </Link>
-                <button 
+                <button
                   className="btn btn-danger"
                   onClick={() => deleteStudent(student.id)}
                 >
                   Delete
-                  </button>
+                </button>
               </td>
             </tr>
           ))}
