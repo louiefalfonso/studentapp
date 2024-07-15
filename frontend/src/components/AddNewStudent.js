@@ -64,6 +64,7 @@ const AddNewStudent = () => {
                   <div className="mb-3">
                     <label className="form-label">First Name</label>
                     <input
+                      data-testid="first-name"
                       placeholder="Enter First Name"
                       name="firstname"
                       className="form-control"
@@ -75,6 +76,7 @@ const AddNewStudent = () => {
                     <label className="form-label">Last Name</label>
                     <input
                       placeholder="Enter Last Name"
+                      data-testid="last-name"
                       name="lastname"
                       className="form-control"
                       value={lastName}
@@ -85,6 +87,7 @@ const AddNewStudent = () => {
                     <label className="form-label">Email Address</label>
                     <input
                       placeholder="Add Email Address"
+                      data-testid="email"
                       name="email"
                       className="form-control"
                       value={email}
@@ -96,6 +99,7 @@ const AddNewStudent = () => {
                     <input
                       placeholder="Enter College or Department"
                       name="college"
+                      data-testid="college"
                       className="form-control"
                       value={college}
                       onChange={(e) => setCollege(e.target.value)}
@@ -105,6 +109,7 @@ const AddNewStudent = () => {
                     <label className="form-label">Percentage</label>
                     <input
                       placeholder="Enter Percentage"
+                      data-testid="percentage"
                       name="percentage"
                       className="form-control"
                       value={percentage}
@@ -115,6 +120,7 @@ const AddNewStudent = () => {
                     <label className="form-check-label">Active Student</label>
                     <input
                       className="form-check-input"
+                      data-testid="active-student"
                       type="checkbox"
                       checked={activeStudent}
                       onChange={(e) => setActiveStudent(e.target.checked)} // Set to a boolean value
@@ -122,6 +128,7 @@ const AddNewStudent = () => {
                   </div>
                   <button
                     className="btn btn-success"
+                    data-testid="submit-button"
                     onClick={addNewStudent}
                   >
                     Add New Student
